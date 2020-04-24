@@ -3,7 +3,7 @@ const { LogDraft, LineCountStream } = require('draftlog');
 
 console._stdout = LineCountStream(console._stdout);
 
-function logReactive(data) {
+function logReactive(data, formatter = (s => s)) {
 	let reactiveData;
 	if (typeof data === 'object' && data) {
 		reactiveData = reactive(data);
@@ -12,14 +12,15 @@ function logReactive(data) {
 	}
 
 	const draft = new LogDraft(console, 'log');
-	draft.write(data);
+	draft.write(formatter(data));
 
 	watch(
 		() => reactiveData,
 		() => {
-			draft.update(reactiveData._isRef ? reactiveData.value : reactiveData);
+			const data = reactiveData._isRef ? reactiveData.value : reactiveData;
+			draft.update(formatter(data));
 		},
-		{ deep: true }
+		{ deep: true },
 	);
 
 	return reactiveData;
