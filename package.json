@@ -1,0 +1,15 @@
+{
+  "name": "log-reactive",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hiroki Osame <hiroki.osame@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "draftlog": "^1.0.12",
+    "vue": "^3.0.0-beta.3"
+  }
+}
